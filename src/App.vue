@@ -1,16 +1,36 @@
 <template>
   <v-app id="app">
-    <router-view />
+    <Navigation v-if="!isLogin" />
+    <ApplicationBar v-if="!isLogin" />
+    <v-main>
+      <router-view />
+    </v-main>
   </v-app>
 </template>
+
+<script>
+import { Component, Vue } from "vue-property-decorator";
+import ApplicationBar from "@/components/layout/ApplicationBar.vue";
+import Navigation from "@/components/layout/Navigation.vue";
+
+@Component({
+  components: {
+    ApplicationBar,
+    Navigation,
+  },
+})
+export default class App extends Vue {
+  get isLogin() {
+    return this.$route.name === "login";
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 body {
   margin: 0px;
