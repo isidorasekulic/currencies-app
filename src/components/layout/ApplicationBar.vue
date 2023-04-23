@@ -1,13 +1,13 @@
 <template>
   <v-app-bar clipped-left :elevation="1" color="white" app>
-    <v-avatar color="#FF6600" width="32" size="small" class="mr-3">
+    <v-avatar color="primary" width="32" size="small" class="mr-3">
       <span class="text-h5">A</span>
     </v-avatar>
 
-    <v-app-bar-title>
-      <div class="caption font-weight-medium text-uppercase">Brand name</div>
-      <div class="body-2 font-weight-bold">All stores</div>
-    </v-app-bar-title>
+    <div>
+      <div class="c_subtitle_1">Brand name</div>
+      <div class="c_body font-weight-bold">All stores</div>
+    </div>
 
     <v-spacer></v-spacer>
 

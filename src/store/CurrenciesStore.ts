@@ -25,6 +25,7 @@ const CurrenciesStore = {
         (c: Currency) => c.id === currency.id
       );
       state.currencies.splice(index, 1, currency);
+      sessionStorage.setItem("currencies", JSON.stringify(state.currencies));
     },
   },
   actions: {},

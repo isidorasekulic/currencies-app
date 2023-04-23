@@ -10,14 +10,12 @@
         </div>
       </v-row>
       <v-row>
-        <p class="text-h6 font-weight-bold pt-6 pb-1 mb-0">Sign in</p>
-        <p class="subtitle-2 font-weight-regular pb-6 mb-0">
-          Please enter your email and password
-        </p>
+        <p class="c_title_2 pt-6 pb-1 mb-0">Sign in</p>
+        <p class="c_body pb-6 mb-0">Please enter your email and password</p>
       </v-row>
       <v-row>
         <v-text-field
-          label="Your email address"
+          placeholder="Your email address"
           outlined
           solo
           dense
@@ -26,7 +24,7 @@
       </v-row>
       <v-row>
         <v-text-field
-          label="Password"
+          placeholder="Password"
           type="password"
           outlined
           solo
@@ -37,7 +35,7 @@
       <v-row>
         <v-btn
           block
-          color="#FF6600"
+          color="primary"
           height="34"
           :ripple="false"
           depressed
@@ -61,21 +59,15 @@ export default class Login extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.login {
-  display: flex;
-  flex-direction: column;
-  max-width: 376px;
-  background-color: white;
-  padding: 40px;
-  border-radius: 8px;
-  .login__icon {
-    height: 40px;
-    width: 40px;
-  }
-}
-.v-input--is-focused .v-input__slot {
-  border: 2px solid green !important;
-  border-bottom-color: rgba(0, 0, 0, 0.38) !important;
-}
+<style lang="sass" scoped>
+.login
+  display: flex
+  flex-direction: column
+  max-width: 376px
+  background-color: white
+  padding: 40px
+  border-radius: 8px
+  &__icon
+    height: 40px
+    width: 40px
 </style>

@@ -2,10 +2,10 @@
   <div class="currencies d-flex">
     <div class="currencies__list ma-8">
       <div class="d-flex justify-space-between">
-        <span>Currencies</span>
+        <span class="c_title_1">Currencies</span>
         <v-btn
           right
-          color="#FF6600"
+          color="primary"
           height="34"
           :ripple="false"
           depressed
@@ -23,7 +23,7 @@
           dense
           label="Search"
           prepend-inner-icon="mdi-magnify"
-          class="currencies__search"
+          class="currencies__list__search"
           v-model="searchTerm"
           clearable
         ></v-text-field>
@@ -37,7 +37,7 @@
         dense
       >
         <template v-slot:item="{ item, index }">
-          <tr class="table_row" :key="index">
+          <tr class="currencies__list__table_row" :key="index">
             <td @click="editCurrency(item.id)">{{ item.name }}</td>
             <td @click="editCurrency(item.id)">{{ item.code }}</td>
             <td @click="editCurrency(item.id)">{{ item.symbol }}</td>
@@ -121,7 +121,7 @@ export default class Currencies extends Vue {
   }
 
   removeCurrency(item: Currency, index: number) {
-    if (this.isEditActive && +this.$route.params.id === item.id) {
+    if (this.isEditActive && parseInt(this.$route.params.id) === item.id) {
       this.$router.push({ name: "currencies" });
     }
     this.$store.commit("removeCurrency", index);
@@ -135,17 +135,13 @@ export default class Currencies extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.currencies {
-  height: 100%;
-}
-.currencies__list {
-  width: 100%;
-}
-.currencies__search {
-  max-width: 300px;
-}
-.table_row {
-  cursor: pointer;
-}
+<style lang="sass" scoped>
+.currencies
+  height: 100%
+  &__list
+    width: 100%
+    &__search
+      max-width: 300px
+    &__table_row
+        cursor: pointer
 </style>

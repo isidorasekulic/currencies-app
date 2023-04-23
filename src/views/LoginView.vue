@@ -16,13 +16,12 @@ import Login from "@/components/Login.vue";
 export default class LoginView extends Vue {}
 </script>
 
-<style lang="scss" scoped>
-.login_container {
-  background: url("../assets/background.svg");
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<style lang="sass" scoped>
+.login_container
+	background: url("../assets/background.svg")
+	background-size: cover
+	height: 100vh
+	display: flex
+	justify-content: center
+	align-items: center
 </style>

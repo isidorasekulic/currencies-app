@@ -5,8 +5,8 @@
         <v-btn plain icon class="mr-2" :to="{ name: 'currencies' }">
           <v-icon> mdi-close </v-icon></v-btn
         >
-        <span v-if="isEditActive">Edit Currencies</span>
-        <span v-else>Add Currencies</span>
+        <span v-if="isEditActive" class="c_title_3">Edit Currencies</span>
+        <span v-else class="c_title_3">Add Currencies</span>
       </div>
       <div>
         <v-btn
@@ -22,7 +22,7 @@
         >
         <v-btn
           right
-          color="#FF6600"
+          color="primary"
           height="34"
           :ripple="false"
           depressed
@@ -34,7 +34,7 @@
         >
         <v-btn
           right
-          color="#FF6600"
+          color="primary"
           height="34"
           :ripple="false"
           depressed
@@ -48,7 +48,7 @@
     </div>
     <v-divider />
     <div class="ma-6">
-      <p class="mb-1">Currency name</p>
+      <p class="mb-1 c_subtitle_2">Currency name</p>
       <v-text-field
         outlined
         solo
@@ -59,7 +59,7 @@
         :error-messages="getErrorMessage('name')"
       ></v-text-field>
 
-      <p class="mb-1">Currency code</p>
+      <p class="mb-1 c_subtitle_2">Currency code</p>
       <v-text-field
         outlined
         solo
@@ -70,7 +70,7 @@
         :error-messages="getErrorMessage('code')"
       ></v-text-field>
 
-      <p class="mb-1">Currency symbol</p>
+      <p class="mb-1 c_subtitle_2">Currency symbol</p>
       <v-text-field
         outlined
         solo
@@ -80,6 +80,9 @@
         v-model="currency.symbol"
         :error-messages="getErrorMessage('symbol')"
       ></v-text-field>
+      <v-alert v-if="duplicateCode" color="error" dense type="error"
+        >Currency with this code already exists</v-alert
+      >
     </div>
   </div>
 </template>
@@ -103,13 +106,14 @@ export default class AddCurrency extends Vue {
   };
 
   currency: Currency = this.cloneDeep(this.emptyCurrency);
+  duplicateCode = false;
 
   get isEditActive() {
     return this.$route.name === "editCurrency";
   }
 
   get selectedCurrency() {
-    return this.$route.params.id;
+    return parseInt(this.$route.params.id);
   }
 
   @Validations()
@@ -122,26 +126,40 @@ export default class AddCurrency extends Vue {
   };
 
   getErrorMessage(fieldName: string) {
-    if (!this.$v.currency[fieldName]?.required) {
-      return `Please enter a ${fieldName}`;
-    }
-    if (
-      this.$v.currency[fieldName]?.minLength === false ||
-      this.$v.currency[fieldName]?.maxLength === false
-    ) {
-      return `Please enter a valid ${fieldName}`;
+    if (this.$v.currency[fieldName]?.$error) {
+      if (!this.$v.currency[fieldName]?.required) {
+        return `Please enter a ${fieldName}`;
+      }
+      if (
+        this.$v.currency[fieldName]?.minLength === false ||
+        this.$v.currency[fieldName]?.maxLength === false
+      ) {
+        return `Please enter a valid ${fieldName}`;
+      }
     }
     return [];
   }
 
   addCurrency() {
     this.$v.$touch();
-    if (!this.$v.$invalid) {
+    if (!this.$v.$invalid && this.isCodeValid()) {
       this.currency.id = this.$store.getters.nextId;
       this.$store.commit("addCurrency", this.currency);
       this.currency = this.cloneDeep(this.emptyCurrency);
       this.$v.$reset();
     }
+  }
+
+  isCodeValid() {
+    const codeExists = this.$store.getters.currencies.find(
+      (c: Currency) => c.code === this.currency.code
+    );
+    if (codeExists) {
+      this.duplicateCode = true;
+      setTimeout(() => (this.duplicateCode = false), 3000);
+      return false;
+    }
+    return true;
   }
 
   editCurrency() {
@@ -160,9 +178,9 @@ export default class AddCurrency extends Vue {
   }
 
   getCurrency() {
-    if (this.$route.params.id) {
+    if (this.selectedCurrency) {
       this.currency = this.cloneDeep(
-        this.$store.getters.getCurrencyById(this.$route.params.id)
+        this.$store.getters.getCurrencyById(this.selectedCurrency)
       );
     } else {
       this.currency = this.cloneDeep(this.emptyCurrency);
@@ -175,8 +193,7 @@ export default class AddCurrency extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.add_currency {
-  min-width: 440px;
-}
+<style lang="sass" scoped>
+.add_currency
+	min-width: 440px
 </style>
