@@ -42,6 +42,7 @@
           :ripple="false"
           depressed
           class="white--text text-none"
+          @click="signIn()"
           >Sign in</v-btn
         >
       </v-row>
@@ -53,7 +54,11 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Login extends Vue {}
+export default class Login extends Vue {
+  signIn() {
+    this.$router.push("/currencies");
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -25,6 +25,11 @@ const routes: Array<RouteConfig> = [
         name: "addCurrency",
         component: Currencies,
       },
+      {
+        path: "edit/:id",
+        name: "editCurrency",
+        component: Currencies,
+      },
     ],
   },
 ];
