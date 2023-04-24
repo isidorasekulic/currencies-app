@@ -93,11 +93,10 @@ import { validationMixin } from "vuelidate";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
 import { Validations } from "vuelidate-property-decorators";
 import { Currency } from "@/types/Currency";
+import cloneDeep from "lodash/cloneDeep";
 
 @Component({ mixins: [validationMixin] })
 export default class AddCurrency extends Vue {
-  cloneDeep = require("lodash.clonedeep");
-
   emptyCurrency: Currency = {
     id: 0,
     name: "",
@@ -105,7 +104,7 @@ export default class AddCurrency extends Vue {
     symbol: "",
   };
 
-  currency: Currency = this.cloneDeep(this.emptyCurrency);
+  currency: Currency = cloneDeep(this.emptyCurrency);
   duplicateCode = false;
 
   get isEditActive() {
@@ -145,7 +144,7 @@ export default class AddCurrency extends Vue {
     if (!this.$v.$invalid && this.isCodeValid()) {
       this.currency.id = this.$store.getters.nextId;
       this.$store.commit("addCurrency", this.currency);
-      this.currency = this.cloneDeep(this.emptyCurrency);
+      this.currency = cloneDeep(this.emptyCurrency);
       this.$v.$reset();
     }
   }
@@ -179,11 +178,11 @@ export default class AddCurrency extends Vue {
 
   getCurrency() {
     if (this.selectedCurrency) {
-      this.currency = this.cloneDeep(
+      this.currency = cloneDeep(
         this.$store.getters.getCurrencyById(this.selectedCurrency)
       );
     } else {
-      this.currency = this.cloneDeep(this.emptyCurrency);
+      this.currency = cloneDeep(this.emptyCurrency);
     }
   }
 
