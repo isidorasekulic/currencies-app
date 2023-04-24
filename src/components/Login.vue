@@ -18,7 +18,6 @@
           placeholder="Your email address"
           outlined
           solo
-          dense
           flat
         ></v-text-field>
       </v-row>
@@ -28,7 +27,6 @@
           type="password"
           outlined
           solo
-          dense
           flat
         ></v-text-field>
       </v-row>
@@ -36,7 +34,6 @@
         <v-btn
           block
           color="primary"
-          height="34"
           :ripple="false"
           depressed
           class="white--text text-none"

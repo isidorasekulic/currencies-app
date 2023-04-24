@@ -6,7 +6,6 @@
         <v-btn
           right
           color="primary"
-          height="34"
           :ripple="false"
           depressed
           class="white--text text-capitalize"
@@ -20,7 +19,6 @@
           outlined
           solo
           flat
-          dense
           label="Search"
           prepend-inner-icon="mdi-magnify"
           class="currencies__list__search"

@@ -11,7 +11,6 @@
       <div>
         <v-btn
           right
-          height="34"
           :ripple="false"
           depressed
           outlined
@@ -23,7 +22,6 @@
         <v-btn
           right
           color="primary"
-          height="34"
           :ripple="false"
           depressed
           class="white--text text-capitalize"
@@ -35,7 +33,6 @@
         <v-btn
           right
           color="primary"
-          height="34"
           :ripple="false"
           depressed
           class="white--text text-capitalize"
@@ -53,7 +50,6 @@
         outlined
         solo
         flat
-        dense
         placeholder="Add name"
         v-model="currency.name"
         :error-messages="getErrorMessage('name')"
@@ -64,7 +60,6 @@
         outlined
         solo
         flat
-        dense
         placeholder="e.g. USD"
         v-model="currency.code"
         :error-messages="getErrorMessage('code')"
@@ -75,7 +70,6 @@
         outlined
         solo
         flat
-        dense
         placeholder="Add symbol"
         v-model="currency.symbol"
         :error-messages="getErrorMessage('symbol')"

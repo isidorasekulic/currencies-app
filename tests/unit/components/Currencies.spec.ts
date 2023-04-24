@@ -56,11 +56,10 @@ describe("Currencies", () => {
     ).toBe("US Dollar");
   });
 
-  it('calls the removeCurrency method when the delete button is clicked', () => {
-    const removeButton = wrapper.find('.currencies__list__table_row button')
-    removeButton.trigger('click')
+  it("calls the removeCurrency method when the delete button is clicked", () => {
+    const removeButton = wrapper.find(".currencies__list__table_row button");
+    removeButton.trigger("click");
 
-    expect(wrapper.vm.$store.commit).toHaveBeenCalledWith('removeCurrency', 0)
+    expect(wrapper.vm.$store.commit).toHaveBeenCalledWith("removeCurrency", 0);
   });
-
 });
